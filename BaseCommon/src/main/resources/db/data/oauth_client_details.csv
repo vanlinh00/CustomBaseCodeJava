@@ -1,0 +1,5 @@
+"client_id","resource_ids","client_secret","scope","authorized_grant_types","web_server_redirect_uri","authorities","access_token_validity","refresh_token_validity","additional_information","autoapprove"
+"server-server","resource_id","$2a$10$VamsQjlA0I39TsLt6mF0w.PI82ndSYGzUkRfQJxuZ1bYF2gRgyt56","read,write,trust","client_credentials",NULL,NULL,500,500,NULL,true
+"external-server","resource_id","$2a$10$KAFPX.jFDWAHeMquYba7EOWHUAb7kucIAGUXbxPSr7xalnkJHebZq","read,write,trust","client_credentials",NULL,NULL,500,500,NULL,true
+"mobile-client","resource_id","$2a$10$ylu0PqXegVykftCUCNXMXOru9b.1..FEcL..gl9mnwDX4LbPiHP6W","read,write,trust","password,refresh_token,implicit,authorization_code",NULL,NULL,500,500,NULL,true
+"admin-client","resource_id","$2a$10$CJFZ/W7mIyx7B2nk14MMk.M.F9UT5qt5eVHI4819aVO/sIKa9uqSa","read,write,trust","password,refresh_token,implicit,authorization_code",NULL,NULL,500,500,NULL,true

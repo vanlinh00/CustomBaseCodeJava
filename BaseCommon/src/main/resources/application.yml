@@ -1,0 +1,28 @@
+security:
+  origin:
+    domain: ${ORIGIN_DOMAIN:}
+    allow: ${ORIGIN_ALLOW:true}
+spring:
+  application:
+    name: omi_phr_common
+    version: 1.0.0  # <--- ADD THIS LINE
+  config:
+    jwt:
+      passkey: "123456" # <--- ADD THIS LINE
+  datasource:
+    url: jdbc:mysql://localhost:3306/base_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: base_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    jpa:
+      hibernate:
+        ddl-auto: update # Creates or updates tables automatically
+      show-sql: true
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL8Dialect
+tomo:
+  oauth:
+    logout: /api/v1/auth/logout # Set your logout endpoint URL or custom value here
+    logoutByListUser: /api/v1/auth/logout-list-user # <--- ADD THIS LINE

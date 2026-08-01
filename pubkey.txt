@@ -1,0 +1,4 @@
+keytool -genkeypair -alias jwt -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore jwt.p12 -validity 3650
+
+openssl pkcs12 -in jwt.p12 -clcerts -nokeys -out cert.pem -passin pass:123456
+openssl x509 -in cert.pem -pubkey -noout > public_key.pem

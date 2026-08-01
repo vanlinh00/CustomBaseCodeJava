@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet author="Linhnv03" id="users">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="login_id" type="VARCHAR(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(128)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nick_name" type="VARCHAR(128)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="gender" defaultValue="U" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+            <column name="height_cm" type="FLOAT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="weight_kg" type="FLOAT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="point" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="point_received_date" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+            <column name="initial_password" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="access_start_date" type="VARCHAR(8)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="access_end_date" type="VARCHAR(8)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_confirmed" defaultValueNumeric="0" type="TINYINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reg_verify_status" defaultValueNumeric="0" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="insured_card_symbol" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="insured_card_number" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="insured_card_branch_no" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="previous_state" defaultValueNumeric="0" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" defaultValueNumeric="0" type="TINYINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="creator" defaultValueComputed="'system'" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updater" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Linhnv03" id="oauth_access_token">
+        <createTable tableName="oauth_access_token">
+            <column name="authentication_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_access_token"/>
+            </column>
+            <column name="token" type="BLOB"/>
+            <column name="token_id" type="VARCHAR(255)"/>
+            <column name="user_name" type="VARCHAR(255)"/>
+            <column name="client_id" type="VARCHAR(255)"/>
+            <column name="authentication" type="BLOB"/>
+            <column name="refresh_token" type="VARCHAR(255)"/>
+            <column name="device_token" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Linhnv03" id="oauth_client_details">
+        <createTable tableName="oauth_client_details">
+            <column name="client_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_client_details"/>
+            </column>
+            <column name="resource_ids" type="TEXT"/>
+            <column name="client_secret" type="TEXT"/>
+            <column name="scope" type="TEXT"/>
+            <column name="authorized_grant_types" type="TEXT"/>
+            <column name="web_server_redirect_uri" type="TEXT"/>
+            <column name="authorities" type="TEXT"/>
+            <column name="access_token_validity" type="INTEGER"/>
+            <column name="refresh_token_validity" type="INTEGER"/>
+            <column name="additional_information" type="TEXT"/>
+            <column name="autoapprove" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Linhnv03" id="oauth_refresh_token">
+        <createTable tableName="oauth_refresh_token">
+            <column name="token_id" type="VARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="pk_oauth_refresh_token"/>
+            </column>
+            <column name="token" type="BLOB"/>
+            <column name="authentication" type="BLOB"/>
+        </createTable>
+    </changeSet>
+
+
+
+
+    <changeSet author="Linhnv03" id="admins">
+        <createTable tableName="admins">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="login_id" type="VARCHAR(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(128)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="gmail" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="group_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="can_send_notification" defaultValueNumeric="1" type="TINYINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_deleted" defaultValueNumeric="0" type="TINYINT">
+                <constraints nullable="false"/>
+            </column>
+
+
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="creator" defaultValueComputed="'system'" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updater" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Linhnv03" id="device_tokens">
+        <createTable tableName="device_tokens">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="jti" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="device_token" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="access_token" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_admin" defaultValueBoolean="false" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="creator" defaultValueComputed="'system'" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updater" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Linhnv03" id="login_histories">
+        <createTable tableName="login_histories">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ip_address" type="VARCHAR(45)">
+                <constraints nullable="true"/>
+            </column>
+            <column defaultValueBoolean="true" name="success" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+
+
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="creator" defaultValueComputed="'system'" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updater" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+
+
+
+    <changeSet author="Linhnv03" id="oauth_client_details-data">
+        <loadData
+                encoding="UTF-8"
+                file="db/data/oauth_client_details.csv"
+                separator=","
+                quotchar="&quot;"
+                tableName="oauth_client_details">
+            <column name="client_id" type="STRING"/>
+            <column name="resource_ids" type="STRING"/>
+            <column name="client_secret" type="STRING"/>
+            <column name="scope" type="STRING"/>
+            <column name="authorized_grant_types" type="STRING"/>
+            <column name="web_server_redirect_uri" type="STRING"/>
+            <column name="authorities" type="STRING"/>
+            <column name="access_token_validity" type="NUMERIC"/>
+            <column name="refresh_token_validity" type="NUMERIC"/>
+            <column name="additional_information" type="STRING"/>
+            <column name="autoapprove" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+
+    <changeSet author="Linhnv03" id="admins-data">
+        <loadData
+                encoding="UTF-8"
+                file="db/data/admins.csv"
+                separator=","
+                quotchar="&quot;"
+                tableName="admins">
+            <column name="login_id" type="STRING"/>
+            <column name="password_hash" type="STRING"/>
+            <column name="role" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+
+    <changeSet author="Linhnv03" id="users-data">
+        <loadData
+                encoding="UTF-8"
+                file="db/data/users.csv"
+                separator=","
+                quotchar="&quot;"
+                tableName="users">
+            <column name="login_id" type="STRING"/>
+            <column name="password_hash" type="STRING"/>
+            <column name="full_name" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+
+
+
+</databaseChangeLog>
+

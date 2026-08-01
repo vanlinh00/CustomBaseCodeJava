@@ -1,0 +1,3 @@
+"login_id","password_hash","full_name","gender","email"
+"user001","$2a$10$ZOXnRQmJhSZ4v5ZnZPl83unE/Mm6lL/czofh1Wzc2medXdBgN17CG","User 001","M","test1@gmail.com"
+"user002","$2a$10$KRGPq4ouVra4PBoxnCjI.ehsks3gswgx453Y4csSfBAnYzVkB/lYe","User 002","F","test2@gmail.com"

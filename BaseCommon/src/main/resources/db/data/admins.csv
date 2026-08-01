@@ -1,0 +1,2 @@
+"login_id","password_hash","role"
+"admin","$2a$10$AsUU.7CuTdktyDgYkQr2XOwMIlfjIn7HsQhLXaoUqbySQiiS5NqEG","ROLE_ADMIN"

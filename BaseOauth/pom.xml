@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>OmiPhr</artifactId>
+		<groupId>org.example</groupId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>BaseOauth</artifactId>
+
+
+	<properties>
+		<java.version>17</java.version>
+		<querydsl.version>5.1.0</querydsl.version>
+		<springdoc.version>2.6.0</springdoc.version>
+		<app.name>${project.artifactId}</app.name>
+		<apache-poi-version>5.4.0</apache-poi-version>
+		<spring-security.version>6.5.9</spring-security.version>
+	</properties>
+
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>local</spring.profiles.active>
+				<server.port>8081</server.port>
+				<app.version>${project.version}</app.version>
+				<app.profile>local</app.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<spring.profiles.active>develop</spring.profiles.active>
+				<server.port>8081</server.port>
+				<app.version>${project.version}</app.version>
+				<app.profile>dev</app.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>stg</id>
+			<properties>
+				<spring.profiles.active>staging</spring.profiles.active>
+				<server.port>8081</server.port>
+				<app.version>${project.version}</app.version>
+				<app.profile>stg</app.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.profiles.active>product</spring.profiles.active>
+				<server.port>8081</server.port>
+				<app.version>${project.version}</app.version>
+				<app.profile>prod</app.profile>
+			</properties>
+		</profile>
+	</profiles>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.example</groupId>
+			<artifactId>BaseCommon</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
+		<!-- DATABASE -->
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+
+		<!-- THYMELEAF -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
+		<!-- SpringDoc -->
+		<!--<dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>-->
+	</dependencies>
+
+
+	<build>
+		<finalName>${app.name}</finalName>
+
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.yml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>certificate/**</include>
+				</includes>
+			</resource>
+		</resources>
+
+
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.6.1</version>
+				<executions>
+					<execution>
+						<id>unpack-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.example</groupId>
+									<artifactId>BaseCommon</artifactId>
+									<version>${project.version}</version>
+									<outputDirectory>${project.build.outputDirectory}/config/</outputDirectory>
+									<includes>**/*.yml</includes>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+

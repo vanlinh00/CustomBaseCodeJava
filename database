@@ -1,0 +1,21 @@
+
+
+spring:
+ config:
+   jwt:
+     passkey: ${JWT_PASSKEY:123456}
+ application:
+   name: omi_phr_common
+   version: 1.0.0
+ datasource:
+   driver-class-name: com.mysql.cj.jdbc.Driver # Required so Hikari knows which driver to load
+   url: jdbc:mysql://${DATASOURCE_URL:localhost}:3308/omi_phr_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true
+   username: ${DATASOURCE_USERNAME:root}
+   password: ${DATASOURCE_PASSWORD:omi_phr_db}
+
+
+tomo:
+ oauth:
+   logout: ${AUTH_SERVER_URL:http://localhost:8081}/oauth/logout
+   logoutByListUser: ${AUTH_SERVER_URL:http://localhost:8081}/oauth/logout-by-list-user
+
